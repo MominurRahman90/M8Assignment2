@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chat-app-deployment
+  name: chat-app
   namespace: mominur
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: chat-app
@@ -14,7 +14,10 @@ spec:
         app: chat-app
     spec:
       containers:
-      - name: chat-app-container
-        image: mominur2804/chat-app:latest
-        ports:
-        - containerPort: 3000
+        - name: chat-app
+          image: mominur2804/chat-app:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
